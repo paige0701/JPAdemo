@@ -1,0 +1,172 @@
+#
+#
+#spring:
+#  profiles: h2-in-memory-db
+#  datasource:
+#    driverClassName: org.h2.Driver
+#    url: jdbc:h2:mem:jpa;DB_CLOSE_DELAY\=-1
+#    username: sa
+#    password:
+#  secondDatasource:
+#    driverClassName: org.h2.Driver
+#    url: jdbc:h2:mem:jpa-datasources;DB_CLOSE_DELAY\=-1
+#    username: sa
+#    password:
+#  jpa:
+#    hibernate:
+#      dialect: org.hibernate.dialect.H2Dialect
+#      ddl-auto: create
+#  h2:
+#    console:
+#      enabled: true
+#      path: /console
+#
+## WAS 설정
+#server:
+#  port: 8083
+#  display-name: swc
+#  session:
+#    timeout: 7200
+
+
+spring:
+  profiles:
+    active: local,log
+  jmx:
+    enabled: false
+  # EMAIL 설정 (로컬 메일발송용)
+  mail:
+    host: email-smtp.us-east-1.amazonaws.com
+    port: 587
+    username: AKIAINNZTXCPLOYIAOQQ
+    password: AqLaJ5R3D//Ekhphr0d/0QlvGfsVQ60ogG1VHNcjczGw
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY\=-1
+    username: sa
+    password:
+    platform: h2
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.H2Dialect
+      ddl-auto: create
+      show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        hbm2ddl:
+          import_files: /sql/init.sql
+  h2:
+    console:
+      enabled: true
+      path: /console
+
+#  # DB
+#  datasource:
+#    initialize: true
+#    driverClassName: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://bliex.kr:31306/trust?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+#    username: exntu
+#    password: t~paas
+#    test-while-idle: true
+#    test-on-borrow: true
+#    initial-size: 10
+#    max-active: 10
+#    max-idle: 10
+#    min-idle: 10
+#    max-wait: 6000
+#    validation-query: SELECT 1
+#    tomcat:
+#      test-on-borrow: true
+#      test-while-idle: true
+#      initial-size: 10
+#      max-active: 10
+#      max-idle: 10
+#      min-idle: 10
+#      max-wait: 6000
+#      validation-query: SELECT 1
+
+  # JPA
+#  jpa:
+#    database: mysql
+#    show-sql: false
+#    hibernate:
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#    properties:
+#      hibernate:
+#        format_sql: false
+#        hbm2ddl:
+#          auto: create
+#          import_files: /sql/init.sql
+
+  # HTTP
+  http:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+
+# Security 설정
+security:
+  oauth2:
+    # OAuth 서버 Client 정보
+    client:
+      client-id: trust
+      client-secret: trust-secret
+    resource:
+      token-info-uri: http://exntu.kr:58082/oauth/check_token
+
+# WAS 설정
+server:
+  port: 8083
+  display-name: swc
+  session:
+    timeout: 7200
+
+
+# App 설정
+#swc:
+#  # WAS 정보
+#  was:
+#    domain: https://swc.com
+#  # 발송용 메일정보
+#  mail:
+#    id: mailer@exntu.com
+#  admin:
+#    email: starlkj@bliex.com
+#  # DB
+#  datasource:
+#    # MySQL
+#    mysql:
+#      driverClassName: com.mysql.jdbc.Driver
+#      url: jdbc:mysql://bliex.kr:31306/swc?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+#      username: swc
+#      password: swc00
+#      test-while-idle: true
+#      test-on-borrow: true
+#      initial-size: 10
+#      max-active: 10
+#      max-idle: 10
+#      min-idle: 10
+#      max-wait: 6000
+#      connection-test-query: SELECT 1
+
+
+
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# Log Profile
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  profiles: log
+  # JPA
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
