@@ -5,13 +5,14 @@ import com.example.jpa.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * Created by paige on 16/6/17.
+ * /Users/Paige/Desktop/spring/JPAdemo/target/demo-0.0.1-SNAPSHOT.jar
+ *
  */
 @RestController
 @RequestMapping("/member")
