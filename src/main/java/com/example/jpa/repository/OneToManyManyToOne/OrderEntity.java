@@ -15,7 +15,7 @@ public class OrderEntity {
     |-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
     @Id
     @Column(name = "order_id")
-    private String id;
+    private String orderId;
 
     @Column(name = "item")
     private String item;
@@ -26,7 +26,7 @@ public class OrderEntity {
     @Column(name = "price")
     private int price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity member;
 
@@ -51,11 +51,11 @@ public class OrderEntity {
     | Getter & Setter Method ( DI Method )
     |-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
     public String getOrderId() {
-        return id;
+        return orderId;
     }
 
     public void setOrderId(String orderId) {
-        this.id = orderId;
+        this.orderId = orderId;
     }
 
     public String getItem() {
@@ -97,7 +97,7 @@ public class OrderEntity {
     |-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
     @Override
     public String toString() {
-        return "Order [orderId=" + id
+        return "Order [orderId=" + orderId
                 + ", item=" + item
                 + ", cnt=" + cnt
                 + ", price=" + price

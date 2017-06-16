@@ -26,7 +26,7 @@ public class MemberEntity {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private List<OrderEntity> orders;
 
 
