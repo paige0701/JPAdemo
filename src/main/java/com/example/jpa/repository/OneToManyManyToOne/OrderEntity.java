@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ORDER")
+@Table(name = "ordering")
 public class OrderEntity {
 
 
@@ -14,9 +14,7 @@ public class OrderEntity {
     | Private Variables
     |-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "id")
+    @Column(name = "order_id")
     private String id;
 
     @Column(name = "item")
@@ -28,8 +26,8 @@ public class OrderEntity {
     @Column(name = "price")
     private int price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     private MemberEntity member;
 
 

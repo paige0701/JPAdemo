@@ -17,7 +17,7 @@ public class MemberEntity {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "id")
+    @Column(name = "member_id")
     private String id;
 
     @Column(name = "name")
