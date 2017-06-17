@@ -5,7 +5,6 @@ import com.example.jpa.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,8 +16,10 @@ import java.util.List;
 @RequestMapping("/member")
 public class MemberController {
 
+
     @Autowired
     MemberService _memberService;
+
 
 
     // 전체 회원 정보 조회
@@ -41,28 +42,41 @@ public class MemberController {
     }
 
 
-    /**
-     * 회원 정보 등록하기
-     *
-     * @param id
-     * @param memberInfo
-     * @return
-     */
+    // 회원 정보 등록
+    @RequestMapping(method = RequestMethod.POST)
+    public Object register(@RequestBody MemberEntity member){
+
+        MemberEntity list = new MemberEntity();
+        list.setAddress(member.getAddress());
+        list.setName(member.getName());
+        list.setId(member.getId());
+
+        MemberEntity result = _memberService.register(list);
+
+        return result;
+
+    }
 
 
     // 회원 정보 업데이트하기
     @RequestMapping(value="/{id}", method = RequestMethod.PUT)
     public Object modify(@PathVariable(value = "id") String id, @RequestBody MemberEntity memberInfo){
 
-
-        List<MemberEntity> result = new ArrayList<>();
-        /**
-         * @PathVariable 은  url
-         *
-         */
+        MemberEntity result = _memberService.modify(id,memberInfo);
 
         return result;
     }
+
+
+    // 특정 회원 지우기
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public Object remove(@PathVariable(value="id") String id){
+
+        _memberService.remove(id);
+        List<MemberEntity> result = _memberService.findAll();
+        return result;
+    }
+
 
 
 

@@ -5,6 +5,7 @@ import com.example.jpa.repository.OneToManyManyToOne.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 /**
@@ -22,14 +23,12 @@ public class MemberService {
      */
 
     @Autowired
-    MemberRepository _memberRempository;
+    MemberRepository _memberRepository;
 
     // 전체 회원 목록 조회
     public List<MemberEntity> findAll(){
 
-        List<MemberEntity> result = _memberRempository.findAll();
-
-
+        List<MemberEntity> result = _memberRepository.findAll();
         return result;
     }
 
@@ -37,23 +36,38 @@ public class MemberService {
     // 한명의 회원 정보 조회
     public MemberEntity findOne(String id){
 
-        MemberEntity result = _memberRempository.findOne(id);
+        MemberEntity result = _memberRepository.findOne(id);
         return result;
 
     }
 
     // 회원 등록하기
-    public List<MemberEntity> register(){
-        return null;
+    public MemberEntity register(MemberEntity member){
+
+        MemberEntity result =  _memberRepository.save(member);
+        return result;
+
     }
 
     // 회원 정보 수정
-    public List<MemberEntity> modify(){
-        return null;
+    public MemberEntity modify(String id, MemberEntity member){
+
+        MemberEntity selectedMember = _memberRepository.getOne(id);
+        selectedMember.setName(member.getName());
+        selectedMember.setAddress(member.getAddress());
+        MemberEntity result = _memberRepository.save(selectedMember);
+
+        return result;
     }
 
     //한명 회원 정보 지우기
-    public void remove(){}
+    public void remove(String id){
+
+        MemberEntity member = _memberRepository.getOne(id);
+        _memberRepository.delete(member);
+
+
+    }
 
 }
 
