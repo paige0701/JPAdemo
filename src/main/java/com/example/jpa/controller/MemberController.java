@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * Created by paige on 16/6/17.
  * /Users/Paige/Desktop/spring/JPAdemo/target/demo-0.0.1-SNAPSHOT.jar
- *
  */
 @RestController
 @RequestMapping("/member")
