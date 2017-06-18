@@ -17,6 +17,9 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
 
+    public OrderController() {
+    }
+
     @Autowired
     MemberService _memberService;
 
@@ -44,14 +47,11 @@ public class OrderController {
 
     // 오더 하나를 인서트한다
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public void register(@PathVariable(value = "id")String id, @RequestBody OrderEntity orders){
+    public MemberEntity register(@PathVariable(value = "id")String id, @RequestBody OrderEntity orders){
 
-
-        System.out.print(orders.getCnt());
-//        MemberEntity member = _memberRepository.getOne(id);
-//        orders.setMember(member);
 
         MemberEntity result = _orderService.register(id, orders);
+        return result;
 
 
     }

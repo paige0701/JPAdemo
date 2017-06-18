@@ -1,19 +1,25 @@
 package com.example.jpa.repository.OneToManyManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "ordering")
-public class OrderEntity {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class OrderEntity implements Serializable{
 
-
+    private static final long serialVersionUID = 1L;
 
     /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     | Private Variables
     |-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "order_id")
     private String orderId;
 
@@ -26,8 +32,9 @@ public class OrderEntity {
     @Column(name = "price")
     private int price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")
+    @JsonBackReference
     private MemberEntity member;
 
 
@@ -89,6 +96,14 @@ public class OrderEntity {
     public void setMember(MemberEntity member) {
         this.member = member;
     }
+
+//    public void setMember(MemberEntity member) {
+//        // 기존관계 제거
+//        if ( this.member != null ) {
+//            this.member.getOrders().remove(this);
+//        }
+//        this.member = member;
+//    }
 
 
 

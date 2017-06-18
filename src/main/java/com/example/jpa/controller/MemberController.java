@@ -63,13 +63,13 @@ public class MemberController {
     public Object modify(@PathVariable(value = "id") String id, @RequestBody MemberEntity memberInfo){
 
         MemberEntity result = _memberService.modify(id,memberInfo);
-
+        System.out.print(memberInfo.getOrders());
         return result;
     }
 
 
     // 특정 회원 지우기
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public Object remove(@PathVariable(value="id") String id){
 
         _memberService.remove(id);

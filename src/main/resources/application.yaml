@@ -111,6 +111,9 @@ spring:
     multipart:
       max-file-size: 1024MB
       max-request-size: 1024MB
+  jackson:
+    deserialization: true
+
 
 # Security 설정
 security:
